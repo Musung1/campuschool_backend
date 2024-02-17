@@ -1,6 +1,5 @@
-package com.example.campuschool_backend.domain.User;
+package com.example.campuschool_backend.domain.user;
 
-import com.example.campuschool_backend.domain.Description;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +21,7 @@ public class UserEntity {
     private RoleType roleType;
     private LoginType loginType;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "description_id")
     private Description description;
 
 

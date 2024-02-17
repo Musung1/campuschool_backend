@@ -1,4 +1,4 @@
-package com.example.campuschool_backend.domain;
+package com.example.campuschool_backend.domain.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
