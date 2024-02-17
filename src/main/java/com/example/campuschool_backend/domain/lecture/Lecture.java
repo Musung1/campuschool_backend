@@ -33,6 +33,9 @@ public class Lecture extends AuditingField {
     @OneToMany
     @JoinColumn(name = "register_id")
     private List<Register> registerList = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "curriculum_id")
+    private List<Curriculum> curriculumList = new ArrayList<>();
 
 
 
