@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -27,6 +30,9 @@ public class Lecture extends AuditingField {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+    @OneToMany
+    @JoinColumn(name = "register_id")
+    private List<Register> registerList = new ArrayList<>();
 
 
 
