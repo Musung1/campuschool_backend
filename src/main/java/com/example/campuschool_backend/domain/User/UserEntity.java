@@ -1,5 +1,6 @@
 package com.example.campuschool_backend.domain.User;
 
+import com.example.campuschool_backend.domain.Description;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,10 @@ public class UserEntity {
     @Enumerated(value = EnumType.STRING)
     private RoleType roleType;
     private LoginType loginType;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Description description;
+
 
     protected  UserEntity(){}
     public static UserEntity of(String username,String password, String name, LoginType loginType) {
