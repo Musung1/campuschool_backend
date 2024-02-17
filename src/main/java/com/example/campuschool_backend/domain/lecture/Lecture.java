@@ -1,6 +1,9 @@
 package com.example.campuschool_backend.domain.lecture;
 
 import com.example.campuschool_backend.domain.auditing.AuditingField;
+import com.example.campuschool_backend.domain.lecture.enums.CategoryType;
+import com.example.campuschool_backend.domain.lecture.enums.Difficulty;
+import com.example.campuschool_backend.domain.lecture.enums.LectureStatus;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;

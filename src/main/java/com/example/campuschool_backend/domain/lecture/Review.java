@@ -16,4 +16,11 @@ public class Review {
     private Long id;
     private String content;
     private int rating;
+    protected Review(){}
+    public Review of(String content, int rating) {
+        Review review = new Review();
+        review.setContent(content);
+        review.setRating(rating);
+        return review;
+    }
 }

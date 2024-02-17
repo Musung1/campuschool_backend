@@ -17,4 +17,12 @@ public class Curriculum {
     private int index;
     private String title;
     private String description;
+    protected Curriculum() {}
+    public static Curriculum of(int index, String title, String description) {
+        Curriculum curriculum = new Curriculum();
+        curriculum.setIndex(index);
+        curriculum.setTitle(title);
+        curriculum.setDescription(description);
+        return curriculum;
+    }
 }
