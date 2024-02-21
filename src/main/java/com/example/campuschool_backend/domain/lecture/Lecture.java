@@ -32,7 +32,7 @@ public class Lecture extends AuditingField {
     private int views;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private UserEntity teacher;
     @OneToMany
     @JoinColumn(name = "register_id")
     private List<Register> registerList = new ArrayList<>();
@@ -42,6 +42,16 @@ public class Lecture extends AuditingField {
     @OneToMany
     @JoinColumn(name = "review_id")
     private List<Review> reviewList = new ArrayList<>();
+
+    protected Lecture() {}
+    public Lecture of(String title, CategoryType categoryType, Difficulty difficulty,UserEntity user) {
+        Lecture lecture = new Lecture();
+        lecture.setTitle(title);
+        lecture.setCategoryType(CategoryType.CODING);
+        lecture.setDifficulty(Difficulty.LOW);
+        lecture.setTeacher(user);
+        return lecture;
+    }
 
 
 
