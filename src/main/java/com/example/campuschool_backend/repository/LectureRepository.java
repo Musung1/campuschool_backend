@@ -3,5 +3,7 @@ package com.example.campuschool_backend.repository;
 import com.example.campuschool_backend.domain.lecture.Lecture;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LectureRepository extends JpaRepository<Lecture,Long> {
+import java.util.List;
+
+public interface LectureRepository extends JpaRepository<Lecture,Long>,CustomLectureRepository {
 }

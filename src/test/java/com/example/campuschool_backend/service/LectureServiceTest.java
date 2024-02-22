@@ -10,6 +10,8 @@ import com.example.campuschool_backend.dto.CreateLectureForm;
 import com.example.campuschool_backend.dto.SignUpForm;
 import com.example.campuschool_backend.dto.UserDTO;
 import com.example.campuschool_backend.repository.LectureRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +26,7 @@ class LectureServiceTest {
     @Autowired private LectureService lectureService;
     @Autowired private LectureRepository lectureRepository;
     @Autowired private UserService userService;
+    @Autowired private EntityManager entityManager;
 
     @BeforeEach
     public void signUp() {
@@ -55,6 +58,11 @@ class LectureServiceTest {
         Long lectureId = lectureService.createLecture(createLectureForm);
         Lecture findLecture = lectureRepository.findById(lectureId).orElseThrow(()->new RuntimeException());
         Assertions.assertThat(findLecture).isNotNull();
+    }
+    @Test
+    public void test() {
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+        JPAQueryFactory query = new JPAQueryFactory(entityManager);
     }
 
 }

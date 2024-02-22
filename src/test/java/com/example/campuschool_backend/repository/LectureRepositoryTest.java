@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class LectureRepositoryTest {
@@ -35,8 +38,20 @@ class LectureRepositoryTest {
         lectureRepository.delete(lecture);
         Assertions.assertThatThrownBy(()->lectureRepository.findById(saveLecture.getId()).orElseThrow(()->new RuntimeException()))
                 .isInstanceOf(RuntimeException.class);
+    }
 
-
+    @Test void popularLectureTest() {
+        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL);
+        UserEntity saveUser = userRepository.save(user);
+        List<Lecture> lectures = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Lecture lecture = Lecture.of("lecture1", CategoryType.CODING, Difficulty.LOW,user);
+            lecture.setViews(i);
+            lectures.add(lecture);
+            lectureRepository.save(lecture);
+        }
+        List<Lecture> popularLectures = lectureRepository.findPopularLectures();
+        Assertions.assertThat(popularLectures).isNotNull();
     }
 
 }
