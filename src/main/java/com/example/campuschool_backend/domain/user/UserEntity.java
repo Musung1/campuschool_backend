@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Setter
 @Getter
 @Entity
@@ -22,10 +24,21 @@ public class UserEntity {
     @Enumerated(value = EnumType.STRING)
     private LoginType loginType;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "description_id")
+    @JoinColumn(name = "id")
     private Description description;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity user = (UserEntity) o;
+        return Objects.equals(id, user.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
     protected  UserEntity(){}
     public static UserEntity of(String username,String password, String name, LoginType loginType) {
         UserEntity userEntity = new UserEntity();
