@@ -21,6 +21,7 @@ public class UserEntity {
     private String portfolioImg;
     @Enumerated(value = EnumType.STRING)
     private RoleType roleType;
+    @Enumerated(value = EnumType.STRING)
     private LoginType loginType;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
