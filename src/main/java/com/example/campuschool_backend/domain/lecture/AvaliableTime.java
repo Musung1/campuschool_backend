@@ -17,20 +17,13 @@ public class AvaliableTime {
     @Enumerated(value = EnumType.STRING)
     private Days days;
     private String time;
-    @ManyToOne
-    @JoinColumn(name = "register_id")
-    private UserEntity registerBy;
-    @ManyToOne
-    @JoinColumn(name = "open_id")
-    private UserEntity openBy;
+    private Long registerBy;
 
     protected AvaliableTime(){}
-    public static AvaliableTime of(Days days, String time, UserEntity registerBy, UserEntity openBy) {
+    public static AvaliableTime of(Days days, String time) {
         AvaliableTime avaliableTime = new AvaliableTime();
         avaliableTime.setDays(days);
         avaliableTime.setTime(time);
-        avaliableTime.setRegisterBy(registerBy);
-        avaliableTime.setOpenBy(openBy);
         return avaliableTime;
     }
 }

@@ -37,13 +37,15 @@ public class Lecture extends AuditingField {
     @OneToMany
     @JoinColumn(name = "lecture_id")
     private List<Register> registerList = new ArrayList<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lecture_id")
-    private List<Curriculum> curriculumList = new ArrayList<>();
+    private List<CurriculumEntity> curriculumEntityList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecture_id")
+    private List<AvaliableTime> avaliableTimeList = new ArrayList<>();
     @OneToMany
     @JoinColumn(name = "lecture_id")
     private List<Review> reviewList = new ArrayList<>();
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,13 +64,24 @@ public class Lecture extends AuditingField {
     public static Lecture of(String title, CategoryType categoryType, Difficulty difficulty,UserEntity user) {
         Lecture lecture = new Lecture();
         lecture.setTitle(title);
-        lecture.setCategoryType(CategoryType.CODING);
-        lecture.setDifficulty(Difficulty.LOW);
+        lecture.setCategoryType(categoryType);
+        lecture.setDifficulty(difficulty);
         lecture.setTeacher(user);
         return lecture;
     }
-
-
-
-
+    public static Lecture of(String title,
+                             CategoryType categoryType,
+                             Difficulty difficulty,
+                             List<CurriculumEntity> curriculumEntityList,
+                             List<AvaliableTime> avaliableTimeList,
+                             UserEntity user) {
+        Lecture lecture = new Lecture();
+        lecture.setTitle(title);
+        lecture.setCategoryType(categoryType);
+        lecture.setDifficulty(difficulty);
+        lecture.setCurriculumEntityList(curriculumEntityList);
+        lecture.setAvaliableTimeList(avaliableTimeList);
+        lecture.setTeacher(user);
+        return lecture;
+    }
 }
