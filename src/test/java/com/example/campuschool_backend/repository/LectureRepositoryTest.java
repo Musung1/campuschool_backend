@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class LectureRepositoryTest {
-    @Autowired LectureRepository lectureRepository;
+    @Autowired LectureRepository  lectureRepository;
     @Autowired UserRepository userRepository;
     @Test
     public void lectureCRUDTest() {
@@ -52,6 +52,20 @@ class LectureRepositoryTest {
         }
         List<Lecture> popularLectures = lectureRepository.findPopularLectures();
         Assertions.assertThat(popularLectures).isNotNull();
+    }
+
+    @Test void newLecturesTest() {
+        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL);
+        UserEntity saveUser = userRepository.save(user);
+        List<Lecture> lectures = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Lecture lecture = Lecture.of("lecture1", CategoryType.CODING, Difficulty.LOW,user);
+            lecture.setViews(i);
+            lectures.add(lecture);
+            lectureRepository.save(lecture);
+        }
+        List<Lecture> newLectures = lectureRepository.findNewLectures();
+        Assertions.assertThat(newLectures).isNotNull();
     }
 
 }
