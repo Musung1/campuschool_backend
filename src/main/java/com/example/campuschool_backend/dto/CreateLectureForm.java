@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 public class CreateLectureForm {
     private String title;
+    private int day;
     private CategoryType categoryType;
     private Difficulty difficulty;
     private List<CurriculumEntity> curriculumEntityList;
