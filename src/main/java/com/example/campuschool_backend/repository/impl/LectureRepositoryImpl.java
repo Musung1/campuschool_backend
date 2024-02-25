@@ -26,4 +26,13 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
                 .limit(5)
                 .fetch();
     }
+
+    @Override
+    public List<Lecture> findNewLectures() {
+        QLecture qLecture = new QLecture("l");
+        return queryFactory.selectFrom(qLecture)
+                .orderBy(qLecture.createdAt.asc())
+                .limit(5)
+                .fetch();
+    }
 }
