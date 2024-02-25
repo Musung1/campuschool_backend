@@ -16,6 +16,7 @@ public class LectureService {
     public Long createLecture(CreateLectureForm createLectureForm) {
         UserEntity user = userRepository.findById(1L).orElseThrow(()-> new RuntimeException());
         Lecture lecture = Lecture.of(createLectureForm.getTitle(),
+                createLectureForm.getDescription(),
                 createLectureForm.getDay(),
                 createLectureForm.getCategoryType(),
                 createLectureForm.getDifficulty(),
