@@ -15,14 +15,14 @@ public class AvaliableTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(value = EnumType.STRING)
-    private Days days;
+    private Days day;
     private String time;
     private Long registerBy;
 
     protected AvaliableTime(){}
-    public static AvaliableTime of(Days days, String time) {
+    public static AvaliableTime of(Days day, String time) {
         AvaliableTime avaliableTime = new AvaliableTime();
-        avaliableTime.setDays(days);
+        avaliableTime.setDay(day);
         avaliableTime.setTime(time);
         return avaliableTime;
     }
