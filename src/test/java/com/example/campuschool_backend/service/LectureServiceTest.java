@@ -53,7 +53,7 @@ class LectureServiceTest {
                 .categoryType(CategoryType.CODING)
                 .difficulty(Difficulty.LOW)
                 .avaliableTimeList(avaliableTimeList)
-                .curriculumEntityList(curriculumEntityList)
+                .curriculumList(curriculumEntityList)
                 .build();
         Long lectureId = lectureService.createLecture(createLectureForm);
         Lecture findLecture = lectureRepository.findById(lectureId).orElseThrow(()->new RuntimeException());

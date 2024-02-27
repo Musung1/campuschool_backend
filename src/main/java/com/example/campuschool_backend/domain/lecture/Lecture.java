@@ -70,6 +70,8 @@ public class Lecture extends AuditingField {
         return lecture;
     }
     public static Lecture of(String title,
+                             String description,
+                             int day,
                              CategoryType categoryType,
                              Difficulty difficulty,
                              List<CurriculumEntity> curriculumEntityList,
@@ -77,6 +79,8 @@ public class Lecture extends AuditingField {
                              UserEntity user) {
         Lecture lecture = new Lecture();
         lecture.setTitle(title);
+        lecture.setDescription(description);
+        lecture.setDay(day);
         lecture.setCategoryType(categoryType);
         lecture.setDifficulty(difficulty);
         lecture.setCurriculumEntityList(curriculumEntityList);

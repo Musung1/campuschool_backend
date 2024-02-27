@@ -19,13 +19,11 @@ public class QCurriculumEntity extends EntityPathBase<CurriculumEntity> {
 
     public static final QCurriculumEntity curriculumEntity = new QCurriculumEntity("curriculumEntity");
 
-    public final StringPath description = createString("description");
+    public final StringPath content = createString("content");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final NumberPath<Integer> num = createNumber("num", Integer.class);
-
-    public final StringPath title = createString("title");
 
     public QCurriculumEntity(String variable) {
         super(CurriculumEntity.class, forVariable(variable));

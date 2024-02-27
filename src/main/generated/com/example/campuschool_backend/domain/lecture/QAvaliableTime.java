@@ -19,7 +19,7 @@ public class QAvaliableTime extends EntityPathBase<AvaliableTime> {
 
     public static final QAvaliableTime avaliableTime = new QAvaliableTime("avaliableTime");
 
-    public final EnumPath<com.example.campuschool_backend.domain.lecture.enums.Days> days = createEnum("days", com.example.campuschool_backend.domain.lecture.enums.Days.class);
+    public final EnumPath<com.example.campuschool_backend.domain.lecture.enums.Days> day = createEnum("day", com.example.campuschool_backend.domain.lecture.enums.Days.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
