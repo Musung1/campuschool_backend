@@ -35,7 +35,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String accessTokenHeader = request.getHeader(jwtConst.getAccessKey());
         if(accessTokenHeader == null || !accessTokenHeader.startsWith(jwtConst.getTokenPrefix())) {
             chain.doFilter(request,response);
-            log.info("filterchain");
+            log.info("authorizationFilterOn");
             return;
             //TODO: 나중에 커스텀 에러로 바꿔주기
             //throw new RuntimeException();
