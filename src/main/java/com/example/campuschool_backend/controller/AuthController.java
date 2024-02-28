@@ -4,11 +4,13 @@ import com.example.campuschool_backend.dto.SignUpForm;
 import com.example.campuschool_backend.dto.UserDTO;
 import com.example.campuschool_backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Authorization")
 @RestController
 @RequestMapping("/api")
 public class AuthController {
@@ -19,9 +21,10 @@ public class AuthController {
         return ResponseEntity.ok(userDTO);
     }
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> logIn(HttpServletRequest request) {
+    public ResponseEntity<UserDTO> logIn(HttpServletRequest request, HttpServletResponse response) {
         String username = (String)request.getAttribute("username");
         UserDTO userDTO = userService.logIn(username);
+        System.out.println(response.getHeader("Authorization"));
         return ResponseEntity.ok(userDTO);
     }
     @GetMapping("logout")
