@@ -12,3 +12,11 @@ spring:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
       hibernate.jdbc.time_zone: UTC
+external:
+  jwt:
+    tokenSecretKey: musung
+    tokenPrefix: Bearer/u0020
+    accessKey: Authorization
+    accessTokenExpirationTime: 1800000
+    refreshKey: RefreshToken
+    refreshTokenExpirationTime: 604800000
