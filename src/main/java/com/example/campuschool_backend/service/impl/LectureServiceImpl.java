@@ -1,22 +1,26 @@
-package com.example.campuschool_backend.service;
+package com.example.campuschool_backend.service.impl;
 
 import com.example.campuschool_backend.domain.lecture.Lecture;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.CreateLectureForm;
 import com.example.campuschool_backend.repository.LectureRepository;
 import com.example.campuschool_backend.repository.UserRepository;
+import com.example.campuschool_backend.service.LectureService;
+import com.example.campuschool_backend.service.UserService;
+import com.example.campuschool_backend.util.FileUpload;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
-public class LectureServiceImpl implements LectureService{
+public class LectureServiceImpl implements LectureService {
     private final LectureRepository lectureRepository;
-    private final UserRepository userRepository;
-    private final UserService userService;
 
     public Long createLecture(CreateLectureForm createLectureForm) {
         UserEntity user = null;
-        Lecture lecture = Lecture.of(createLectureForm.getTitle(),
+        String refImg = FileUpload.local(createLectureForm.getImg());
+        Lecture lecture = Lecture.of(
+                createLectureForm.getTitle(),
+                refImg,
                 createLectureForm.getDescription(),
                 createLectureForm.getDay(),
                 createLectureForm.getCategoryType(),
