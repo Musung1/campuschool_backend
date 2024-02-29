@@ -28,7 +28,7 @@ public class AuthController {
         UserDTO userDTO = userService.logIn(username);
         return ResponseEntity.ok(userDTO);
     }
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public ResponseEntity<String> logOut() {
         SecurityContextHolder.clearContext();
         return ResponseEntity.ok("logout");
