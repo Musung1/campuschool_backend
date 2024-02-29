@@ -1,6 +1,6 @@
 package com.example.campuschool_backend.controller;
 
-import com.example.campuschool_backend.dto.SignUpForm;
+import com.example.campuschool_backend.dto.auth.SignUpForm;
 import com.example.campuschool_backend.dto.UserDTO;
 import com.example.campuschool_backend.security.PrincipalUser;
 import com.example.campuschool_backend.service.UserService;

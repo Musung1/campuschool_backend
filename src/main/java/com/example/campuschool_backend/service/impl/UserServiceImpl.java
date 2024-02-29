@@ -2,7 +2,7 @@ package com.example.campuschool_backend.service.impl;
 
 import com.example.campuschool_backend.domain.user.LoginType;
 import com.example.campuschool_backend.domain.user.UserEntity;
-import com.example.campuschool_backend.dto.SignUpForm;
+import com.example.campuschool_backend.dto.auth.SignUpForm;
 import com.example.campuschool_backend.dto.UserDTO;
 import com.example.campuschool_backend.repository.UserRepository;
 import com.example.campuschool_backend.service.UserService;

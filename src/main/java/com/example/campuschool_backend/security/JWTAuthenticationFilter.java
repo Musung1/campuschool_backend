@@ -1,5 +1,5 @@
 package com.example.campuschool_backend.security;
-import com.example.campuschool_backend.dto.LoginForm;
+import com.example.campuschool_backend.dto.auth.LoginForm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

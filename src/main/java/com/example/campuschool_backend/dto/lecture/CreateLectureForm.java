@@ -1,4 +1,4 @@
-package com.example.campuschool_backend.dto;
+package com.example.campuschool_backend.dto.lecture;
 
 import com.example.campuschool_backend.domain.lecture.AvaliableTime;
 import com.example.campuschool_backend.domain.lecture.CurriculumEntity;
@@ -17,8 +17,7 @@ import java.util.List;
 @Setter
 public class CreateLectureForm {
     private String title;
-    @JsonIgnore
-    private MultipartFile img;
+    private String refImg;
     private int day;
     private String description;
     private CategoryType categoryType;

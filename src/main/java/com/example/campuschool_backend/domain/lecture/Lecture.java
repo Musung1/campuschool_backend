@@ -88,6 +88,7 @@ public class Lecture extends AuditingField {
         lecture.setCurriculumEntityList(curriculumEntityList);
         lecture.setAvaliableTimeList(avaliableTimeList);
         lecture.setTeacher(user);
+        lecture.setLectureStatus(LectureStatus.PROGRESS);
         return lecture;
     }
 }

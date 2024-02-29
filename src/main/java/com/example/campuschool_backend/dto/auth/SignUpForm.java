@@ -1,4 +1,4 @@
-package com.example.campuschool_backend.dto;
+package com.example.campuschool_backend.dto.auth;
 
 import com.example.campuschool_backend.domain.user.LoginType;
 import com.example.campuschool_backend.domain.user.UserEntity;
