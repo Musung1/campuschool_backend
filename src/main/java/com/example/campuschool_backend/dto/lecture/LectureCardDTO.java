@@ -32,7 +32,7 @@ public class LectureCardDTO {
                 .description(lecture.getDescription())
                 .lectureStatus(lecture.getLectureStatus())
                 .views(lecture.getViews())
-                .teacherName(lecture.getTeacher().getName())
+                .teacherName("user")
                 .build();
     }
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface LectureService {
     Long createLecture(CreateLectureForm lectureForm);
     List<LectureCardDTO> popularLectures();
+    List<LectureCardDTO> recentLectures();
 }

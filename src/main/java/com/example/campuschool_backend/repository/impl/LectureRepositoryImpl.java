@@ -28,7 +28,7 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
     }
 
     @Override
-    public List<Lecture> findNewLectures() {
+    public List<Lecture> findRecentLectures() {
         QLecture qLecture = new QLecture("l");
         return queryFactory.selectFrom(qLecture)
                 .orderBy(qLecture.createdAt.asc())

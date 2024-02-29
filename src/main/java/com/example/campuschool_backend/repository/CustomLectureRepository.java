@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CustomLectureRepository {
     List<Lecture> findPopularLectures();
-    List<Lecture> findNewLectures();
+    List<Lecture> findRecentLectures();
 }

@@ -30,8 +30,13 @@ public class LectureController {
         return ResponseEntity.ok(lectureForm);
     }
     @GetMapping("/popular")
-    public ResponseEntity<List<LectureCardDTO>> getPopularLecture() {
+    public ResponseEntity<List<LectureCardDTO>> getPopularLectures() {
         List<LectureCardDTO> lectureCardDTOList = lectureService.popularLectures();
+        return ResponseEntity.ok(lectureCardDTOList);
+    }
+    @GetMapping("/recent")
+    public ResponseEntity<List<LectureCardDTO>> getRecentLectures() {
+        List<LectureCardDTO> lectureCardDTOList = lectureService.recentLectures();
         return ResponseEntity.ok(lectureCardDTOList);
     }
 

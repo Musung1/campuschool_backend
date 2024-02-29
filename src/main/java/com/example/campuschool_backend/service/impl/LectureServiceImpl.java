@@ -38,4 +38,9 @@ public class LectureServiceImpl implements LectureService {
         return lectureRepository.findPopularLectures().stream().map((LectureCardDTO::from)).toList();
     }
 
+    @Override
+    public List<LectureCardDTO> recentLectures() {
+        return lectureRepository.findRecentLectures().stream().map((LectureCardDTO::from)).toList();
+    }
+
 }
