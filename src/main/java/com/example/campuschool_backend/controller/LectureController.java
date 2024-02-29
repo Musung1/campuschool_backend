@@ -7,6 +7,7 @@ import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class LectureController {
     private final LectureService lectureService;
     @PermitAll
     @PostMapping("/open")
-    public ResponseEntity<CreateLectureForm> createLecture(@RequestBody CreateLectureForm lectureForm) {
+    public ResponseEntity<CreateLectureForm> createLecture(@ModelAttribute CreateLectureForm lectureForm) {
         Long id = lectureService.createLecture(lectureForm);
         return ResponseEntity.ok(lectureForm);
     }

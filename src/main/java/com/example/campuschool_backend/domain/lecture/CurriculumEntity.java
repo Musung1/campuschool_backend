@@ -4,12 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Objects;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -20,7 +20,6 @@ public class CurriculumEntity {
     private int num;
     private String content;
 
-    protected CurriculumEntity() {}
     public static CurriculumEntity of(int num, String content) {
         CurriculumEntity curriculumEntity = new CurriculumEntity();
         curriculumEntity.setNum(num);

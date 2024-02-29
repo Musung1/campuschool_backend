@@ -4,11 +4,13 @@ import com.example.campuschool_backend.domain.auditing.AuditingField;
 import com.example.campuschool_backend.domain.lecture.enums.Days;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@Data
 @Entity
 public class AvaliableTime {
     @Id
@@ -19,7 +21,6 @@ public class AvaliableTime {
     private String time;
     private Long registerBy;
 
-    protected AvaliableTime(){}
     public static AvaliableTime of(Days day, String time) {
         AvaliableTime avaliableTime = new AvaliableTime();
         avaliableTime.setDay(day);
