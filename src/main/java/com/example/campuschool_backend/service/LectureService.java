@@ -14,4 +14,5 @@ public interface LectureService {
     List<LectureCardDTO> popularLectures();
     List<LectureCardDTO> recentLectures();
     Page<LectureCardDTO> Lectures(LectureSearchParam lectureSearchParam, Pageable pageable);
+    List<LectureCardDTO> getMyOpenLectures(UserEntity user);
 }

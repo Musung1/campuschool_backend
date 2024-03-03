@@ -61,5 +61,12 @@ public class LectureController {
         Page<LectureCardDTO> lectureCardDTOList = lectureService.Lectures(lectureSearchParam,pageable);
         return ResponseEntity.ok(lectureCardDTOList);
     }
+    @GetMapping("open")
+    public ResponseEntity<List<LectureCardDTO>> getMyOpenLectures(@AuthenticationPrincipal UserDetails userDetails) {
+        PrincipalUser principalUser = (PrincipalUser) userDetails;
+        UserEntity user = principalUser.getUser();
+        List<LectureCardDTO> myOpenLectures = lectureService.getMyOpenLectures(user);
+        return ResponseEntity.ok(myOpenLectures);
+    }
 
 }

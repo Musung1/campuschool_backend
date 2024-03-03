@@ -4,6 +4,7 @@ import com.example.campuschool_backend.domain.lecture.Lecture;
 import com.example.campuschool_backend.domain.lecture.enums.CategoryType;
 import com.example.campuschool_backend.domain.lecture.enums.Difficulty;
 import com.example.campuschool_backend.domain.user.LoginType;
+import com.example.campuschool_backend.domain.user.RoleType;
 import com.example.campuschool_backend.domain.user.UserEntity;
 
 import org.assertj.core.api.Assertions;
@@ -22,7 +23,7 @@ class LectureRepositoryTest {
     @Autowired UserRepository userRepository;
     @Test
     public void lectureCRUDTest() {
-        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL);
+        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL,RoleType.USER);
         UserEntity saveUser = userRepository.save(user);
         Lecture lecture = Lecture.of("lecture1", CategoryType.CODING, Difficulty.LOW,user);
         //1. save, find
@@ -41,7 +42,7 @@ class LectureRepositoryTest {
     }
 
     @Test void popularLectureTest() {
-        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL);
+        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL,RoleType.USER);
         UserEntity saveUser = userRepository.save(user);
         List<Lecture> lectures = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -55,7 +56,7 @@ class LectureRepositoryTest {
     }
 
     @Test void newLecturesTest() {
-        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL);
+        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL,RoleType.USER);
         UserEntity saveUser = userRepository.save(user);
         List<Lecture> lectures = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -64,8 +65,20 @@ class LectureRepositoryTest {
             lectures.add(lecture);
             lectureRepository.save(lecture);
         }
-        List<Lecture> newLectures = lectureRepository.findNewLectures();
+        List<Lecture> newLectures = lectureRepository.findRecentLectures();
         Assertions.assertThat(newLectures).isNotNull();
+    }
+    @Test void getMyOpenLectureTest() {
+        UserEntity user = UserEntity.of("musung","musung","musung",LoginType.EMAIL, RoleType.USER);
+        UserEntity saveUser = userRepository.save(user);
+        Lecture lecture1 = Lecture.of("lecture1", CategoryType.CODING, Difficulty.LOW,user);
+        Lecture lecture2 = Lecture.of("lecture2", CategoryType.CODING, Difficulty.LOW,user);
+        lectureRepository.save(lecture1);
+        lectureRepository.save(lecture2);
+        List<Lecture> myOpenLectures = lectureRepository.findMyOpenLectures(saveUser.getId());
+
+        Assertions.assertThat(lecture1).isEqualTo(myOpenLectures.get(0));
+        Assertions.assertThat(lecture2).isEqualTo(myOpenLectures.get(1));
     }
 
 }

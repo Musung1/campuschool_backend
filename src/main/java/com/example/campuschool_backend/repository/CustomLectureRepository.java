@@ -11,4 +11,5 @@ public interface CustomLectureRepository {
     List<Lecture> findPopularLectures();
     List<Lecture> findRecentLectures();
     Page<Lecture> findLectures(LectureSearchParam lectureSearchParam, Pageable pageable);
+    List<Lecture> findMyOpenLectures(Long id);
 }

@@ -51,4 +51,10 @@ public class LectureServiceImpl implements LectureService {
         return lectures.map((LectureCardDTO::from));
     }
 
+    @Override
+    public List<LectureCardDTO> getMyOpenLectures(UserEntity user) {
+        List<Lecture> lectures = lectureRepository.findMyOpenLectures(user.getId());
+        return lectures.stream().map((LectureCardDTO::from)).toList();
+    }
+
 }

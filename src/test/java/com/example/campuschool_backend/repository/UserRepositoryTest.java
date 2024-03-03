@@ -1,6 +1,7 @@
 package com.example.campuschool_backend.repository;
 
 import com.example.campuschool_backend.domain.user.LoginType;
+import com.example.campuschool_backend.domain.user.RoleType;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class UserRepositoryTest {
 
     @Test
     public void userCRUDTest() {
-        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL);
+        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL, RoleType.USER);
         UserEntity saveUser = userRepository.save(user);
 
         //1. create, find
