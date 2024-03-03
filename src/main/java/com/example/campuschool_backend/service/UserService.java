@@ -1,6 +1,6 @@
 package com.example.campuschool_backend.service;
 
-import com.example.campuschool_backend.dto.SignUpForm;
+import com.example.campuschool_backend.dto.auth.SignUpForm;
 import com.example.campuschool_backend.dto.UserDTO;
 
 public interface UserService {

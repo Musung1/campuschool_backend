@@ -1,4 +1,4 @@
-package com.example.campuschool_backend.dto;
+package com.example.campuschool_backend.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
