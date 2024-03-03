@@ -1,6 +1,7 @@
 package com.example.campuschool_backend.service.impl;
 
 import com.example.campuschool_backend.domain.user.LoginType;
+import com.example.campuschool_backend.domain.user.RoleType;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.auth.SignUpForm;
 import com.example.campuschool_backend.dto.UserDTO;
@@ -20,7 +21,9 @@ public class UserServiceImpl implements UserService {
                 signUpForm.getUsername(),
                 passwordEncoder.encode(signUpForm.getPassword()),
                 signUpForm.getName(),
-                LoginType.EMAIL);
+                LoginType.EMAIL,
+                RoleType.USER
+        );
         UserEntity savedUser = userRepository.save(user);
         UserDTO userDTO = UserDTO.from(savedUser);
         return userDTO;

@@ -40,12 +40,13 @@ public class UserEntity {
         return Objects.hash(id);
     }
     protected  UserEntity(){}
-    public static UserEntity of(String username,String password, String name, LoginType loginType) {
+    public static UserEntity of(String username,String password, String name, LoginType loginType,RoleType roleType) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(username);
         userEntity.setPassword(password);
         userEntity.setName(name);
         userEntity.setLoginType(loginType);
+        userEntity.setRoleType(roleType);
         return userEntity;
     }
 }

@@ -4,10 +4,13 @@ import com.example.campuschool_backend.domain.lecture.Lecture;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.CreateLectureForm;
 import com.example.campuschool_backend.dto.lecture.LectureCardDTO;
+import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
 import com.example.campuschool_backend.repository.LectureRepository;
 import com.example.campuschool_backend.service.LectureService;
 import com.example.campuschool_backend.util.FileUpload;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +20,7 @@ import java.util.List;
 public class LectureServiceImpl implements LectureService {
     private final LectureRepository lectureRepository;
 
-    public Long createLecture(CreateLectureForm createLectureForm) {
-        UserEntity user = null;
+    public Long createLecture(UserEntity user, CreateLectureForm createLectureForm) {
         Lecture lecture = Lecture.of(
                 createLectureForm.getTitle(),
                 createLectureForm.getRefImg(),
@@ -41,6 +43,12 @@ public class LectureServiceImpl implements LectureService {
     @Override
     public List<LectureCardDTO> recentLectures() {
         return lectureRepository.findRecentLectures().stream().map((LectureCardDTO::from)).toList();
+    }
+
+    @Override
+    public Page<LectureCardDTO> Lectures(LectureSearchParam lectureSearchParam, Pageable pageable) {
+        Page<Lecture> lectures = lectureRepository.findLectures(lectureSearchParam,pageable);
+        return lectures.map((LectureCardDTO::from));
     }
 
 }

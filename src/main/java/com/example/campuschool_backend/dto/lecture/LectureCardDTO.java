@@ -3,7 +3,6 @@ import com.example.campuschool_backend.domain.lecture.Lecture;
 import com.example.campuschool_backend.domain.lecture.enums.CategoryType;
 import com.example.campuschool_backend.domain.lecture.enums.Difficulty;
 import com.example.campuschool_backend.domain.lecture.enums.LectureStatus;
-import com.example.campuschool_backend.domain.user.UserEntity;
 import lombok.*;
 
 @AllArgsConstructor
