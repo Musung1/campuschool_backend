@@ -3,12 +3,14 @@ package com.example.campuschool_backend.controller;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.CreateLectureForm;
 import com.example.campuschool_backend.dto.lecture.LectureCardDTO;
+import com.example.campuschool_backend.dto.lecture.LectureDetailDTO;
 import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
 import com.example.campuschool_backend.security.PrincipalUser;
 import com.example.campuschool_backend.service.LectureService;
 import com.example.campuschool_backend.util.FileUpload;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -29,6 +31,7 @@ import java.util.List;
 @RestController
 public class LectureController {
     private final LectureService lectureService;
+
     @PostMapping("/open")
     public ResponseEntity<CreateLectureForm> createLecture(
             @RequestParam("img") MultipartFile img,
@@ -67,6 +70,11 @@ public class LectureController {
         UserEntity user = principalUser.getUser();
         List<LectureCardDTO> myOpenLectures = lectureService.getMyOpenLectures(user);
         return ResponseEntity.ok(myOpenLectures);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<LectureDetailDTO> getLectureDetail(@PathVariable Long id) {
+        LectureDetailDTO lectureDetailDTO = lectureService.getLectureDetail(id);
+        return ResponseEntity.ok(lectureDetailDTO);
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.campuschool_backend.service;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.CreateLectureForm;
 import com.example.campuschool_backend.dto.lecture.LectureCardDTO;
+import com.example.campuschool_backend.dto.lecture.LectureDetailDTO;
 import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +16,5 @@ public interface LectureService {
     List<LectureCardDTO> recentLectures();
     Page<LectureCardDTO> Lectures(LectureSearchParam lectureSearchParam, Pageable pageable);
     List<LectureCardDTO> getMyOpenLectures(UserEntity user);
+    LectureDetailDTO getLectureDetail(Long id);
 }
