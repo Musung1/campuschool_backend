@@ -17,6 +17,9 @@ public class Description {
 
     public static Description of(){
         Description description = new Description();
+        description.setDescription("");
+        description.setEducation("");
+        description.setHistory("");
         return description;
     }
 }

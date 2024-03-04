@@ -4,6 +4,7 @@ import com.example.campuschool_backend.domain.lecture.Lecture;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.CreateLectureForm;
 import com.example.campuschool_backend.dto.lecture.LectureCardDTO;
+import com.example.campuschool_backend.dto.lecture.LectureDetailDTO;
 import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
 import com.example.campuschool_backend.repository.LectureRepository;
 import com.example.campuschool_backend.service.LectureService;
@@ -49,6 +50,26 @@ public class LectureServiceImpl implements LectureService {
     public Page<LectureCardDTO> Lectures(LectureSearchParam lectureSearchParam, Pageable pageable) {
         Page<Lecture> lectures = lectureRepository.findLectures(lectureSearchParam,pageable);
         return lectures.map((LectureCardDTO::from));
+    }
+
+    @Override
+    public LectureDetailDTO getLectureDetail(Long id) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(()-> new RuntimeException());
+        return LectureDetailDTO.builder()
+                .day(lecture.getDay())
+                .lectureDescription(lecture.getDescription())
+                .lectureImage(lecture.getRefImage())
+                .lectureTitle(lecture.getTitle())
+                .curriculumEntityList(lecture.getCurriculumEntityList())
+                .reviewList(lecture.getReviewList())
+                .teacherDescription(lecture.getTeacher().getDescription().getDescription())
+                .teacherEducation(lecture.getTeacher().getDescription().getEducation())
+                .teacherHistory(lecture.getTeacher().getDescription().getHistory())
+                .teacherImage(lecture.getTeacher().getImg())
+                .teacherName(lecture.getTeacher().getName())
+                .categoryType(lecture.getCategoryType())
+                .avaliableTimeList(lecture.getAvaliableTimeList())
+                .build();
     }
 
 }
