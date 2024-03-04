@@ -3,6 +3,7 @@ package com.example.campuschool_backend.controller;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.CreateLectureForm;
 import com.example.campuschool_backend.dto.lecture.LectureCardDTO;
+import com.example.campuschool_backend.dto.lecture.LectureDetailDTO;
 import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
 import com.example.campuschool_backend.security.PrincipalUser;
 import com.example.campuschool_backend.service.LectureService;
@@ -62,6 +63,11 @@ public class LectureController {
         pageable.getSort().get().forEach((order -> System.out.println(order.getProperty())));
         Page<LectureCardDTO> lectureCardDTOList = lectureService.Lectures(lectureSearchParam,pageable);
         return ResponseEntity.ok(lectureCardDTOList);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<LectureDetailDTO> getLectureDetail(@PathVariable Long id) {
+        LectureDetailDTO lectureDetailDTO = lectureService.getLectureDetail(id);
+        return ResponseEntity.ok(lectureDetailDTO);
     }
 
 }

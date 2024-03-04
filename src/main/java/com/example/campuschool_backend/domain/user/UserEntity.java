@@ -48,6 +48,7 @@ public class UserEntity {
         userEntity.setName(name);
         userEntity.setLoginType(loginType);
         userEntity.setRoleType(roleType);
+        userEntity.setDescription(Description.of());
         return userEntity;
     }
 }
