@@ -61,6 +61,16 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
                 .fetchOne();
         return new PageImpl<>(lectureList,pageable,count);
     }
+
+    @Override
+    public List<Lecture> findMyOpenLectures(Long id) {
+        QLecture qlecture = QLecture.lecture;
+        List<Lecture> lectureList = queryFactory.selectFrom(qlecture)
+                .where(myLecture(qlecture,id))
+                .fetch();
+        return lectureList;
+    }
+
     private Predicate searchProducts(QLecture lecture, LectureSearchParam lectureSearchParam) {
         BooleanExpression predicate = Expressions.TRUE;
         if(lectureSearchParam.getCategoryType() != null) {
@@ -73,6 +83,11 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
             predicate = predicate.and(lecture.title.contains(lectureSearchParam.getKeyword()));
         }
 
+        return predicate;
+    }
+    private Predicate myLecture(QLecture lecture, Long id) {
+        BooleanExpression predicate = Expressions.TRUE;
+        predicate = predicate.and(lecture.teacher.id.eq(id));
         return predicate;
     }
     private OrderSpecifier<?> lectureSort(QLecture lecture, Pageable page) {
