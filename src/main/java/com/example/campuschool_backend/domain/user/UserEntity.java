@@ -23,7 +23,7 @@ public class UserEntity {
     private RoleType roleType;
     @Enumerated(value = EnumType.STRING)
     private LoginType loginType;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private Description description;
 
