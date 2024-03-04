@@ -12,8 +12,8 @@ import com.querydsl.core.types.Path;
 /**
  * QDescription is a Querydsl query type for Description
  */
-@Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QDescription extends EntityPathBase<Description> {
+@Generated("com.querydsl.codegen.DefaultEmbeddableSerializer")
+public class QDescription extends BeanPath<Description> {
 
     private static final long serialVersionUID = 1755610273L;
 
@@ -24,8 +24,6 @@ public class QDescription extends EntityPathBase<Description> {
     public final StringPath education = createString("education");
 
     public final StringPath history = createString("history");
-
-    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public QDescription(String variable) {
         super(Description.class, forVariable(variable));

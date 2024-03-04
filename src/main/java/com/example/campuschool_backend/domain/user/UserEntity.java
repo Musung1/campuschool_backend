@@ -1,11 +1,12 @@
 package com.example.campuschool_backend.domain.user;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
-
 @Setter
 @Getter
 @Entity
@@ -23,8 +24,7 @@ public class UserEntity {
     private RoleType roleType;
     @Enumerated(value = EnumType.STRING)
     private LoginType loginType;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @Embedded
     private Description description;
 
     @Override
@@ -40,6 +40,7 @@ public class UserEntity {
         return Objects.hash(id);
     }
     protected  UserEntity(){}
+
     public static UserEntity of(String username,String password, String name, LoginType loginType,RoleType roleType) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(username);

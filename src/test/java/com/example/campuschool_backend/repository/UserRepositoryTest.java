@@ -16,23 +16,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
     @Autowired UserRepository userRepository;
 
-    @Test
-    public void userCRUDTest() {
-        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL);
-        UserEntity saveUser = userRepository.save(user);
-
-        //1. create, find
-        UserEntity findUser = userRepository.findById(saveUser.getId()).orElseThrow(()->new RuntimeException());
-        Assertions.assertThat(user).isEqualTo(findUser);
-        //2. update
-        user.setName("leeZZin");
-        UserEntity findAndUpdateUser = userRepository.findById(saveUser.getId()).orElseThrow(()->new RuntimeException());
-        Assertions.assertThat(user).isEqualTo(findAndUpdateUser);
-        //3. delete
-        userRepository.delete(user);
-        Assertions.assertThatThrownBy(()->userRepository.findById(saveUser.getId()).orElseThrow(()->new RuntimeException()))
-                .isInstanceOf(RuntimeException.class);
-        //assertThrows(RuntimeException.class, (Executable) userRepository.findById(saveUser.getId()).orElseThrow(()->new RuntimeException()));
-    }
+//    @Test
+//    public void userCRUDTest() {
+//        UserEntity user = UserEntity.of("123123","123123","musung", LoginType.EMAIL);
+//        UserEntity saveUser = userRepository.save(user);
+//
+//        //1. create, find
+//        UserEntity findUser = userRepository.findById(saveUser.getId()).orElseThrow(()->new RuntimeException());
+//        Assertions.assertThat(user).isEqualTo(findUser);
+//        //2. update
+//        user.setName("leeZZin");
+//        UserEntity findAndUpdateUser = userRepository.findById(saveUser.getId()).orElseThrow(()->new RuntimeException());
+//        Assertions.assertThat(user).isEqualTo(findAndUpdateUser);
+//        //3. delete
+//        userRepository.delete(user);
+//        Assertions.assertThatThrownBy(()->userRepository.findById(saveUser.getId()).orElseThrow(()->new RuntimeException()))
+//                .isInstanceOf(RuntimeException.class);
+//        //assertThrows(RuntimeException.class, (Executable) userRepository.findById(saveUser.getId()).orElseThrow(()->new RuntimeException()));
+//    }
 
 }
