@@ -83,9 +83,8 @@ public class LectureServiceImpl implements LectureService {
     public Long registerLecture(UserEntity userEntity, Long id) {
         Register register = Register.of(userEntity);
         Lecture lecture = lectureRepository.findById(id).orElseThrow(()-> new RuntimeException());
-        if(lecture.checkDuplication(id)) {
-            throw new RuntimeException();
-        }
+        if(lecture.checkDuplication(id)) throw new RuntimeException();
+        if(lecture.checkMyLecture(id)) throw new RuntimeException();
         lecture.addRegister(register);
         return register.getId();
     }

@@ -66,6 +66,10 @@ public class Lecture extends AuditingField {
         }
         return false;
     }
+    public boolean checkMyLecture(Long id) {
+        if(teacher.getId().equals(id)) return true;
+        return false;
+    }
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), id);
