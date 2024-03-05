@@ -76,5 +76,12 @@ public class LectureController {
         LectureDetailDTO lectureDetailDTO = lectureService.getLectureDetail(id);
         return ResponseEntity.ok(lectureDetailDTO);
     }
+    @PostMapping("/{id}")
+    public ResponseEntity<Long> registerLecture(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
+        PrincipalUser principalUser = (PrincipalUser) userDetails;
+        UserEntity userEntity = principalUser.getUser();
+        Long registerId = lectureService.registerLecture(userEntity,id);
+        return ResponseEntity.ok(registerId);
+    }
 
 }

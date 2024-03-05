@@ -1,6 +1,7 @@
 package com.example.campuschool_backend.service.impl;
 
 import com.example.campuschool_backend.domain.lecture.Lecture;
+import com.example.campuschool_backend.domain.lecture.Register;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.CreateLectureForm;
 import com.example.campuschool_backend.dto.lecture.LectureCardDTO;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -75,6 +77,16 @@ public class LectureServiceImpl implements LectureService {
                 .categoryType(lecture.getCategoryType())
                 .avaliableTimeList(lecture.getAvaliableTimeList())
                 .build();
+    }
+    @Transactional
+    @Override
+    public Long registerLecture(UserEntity userEntity, Long id) {
+        Register register = Register.of(userEntity);
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(()-> new RuntimeException());
+        if(lecture.checkDuplication(id)) throw new RuntimeException();
+        if(lecture.checkMyLecture(id)) throw new RuntimeException();
+        lecture.addRegister(register);
+        return register.getId();
     }
 
 }
