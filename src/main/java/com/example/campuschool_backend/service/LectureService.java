@@ -17,4 +17,5 @@ public interface LectureService {
     Page<LectureCardDTO> Lectures(LectureSearchParam lectureSearchParam, Pageable pageable);
     List<LectureCardDTO> getMyOpenLectures(UserEntity user);
     LectureDetailDTO getLectureDetail(Long id);
+    Long registerLecture(UserEntity userEntity, Long id);
 }

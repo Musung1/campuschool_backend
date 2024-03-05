@@ -34,7 +34,7 @@ public class Lecture extends AuditingField {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity teacher;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lecture_id")
     private List<Register> registerList = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
@@ -55,6 +55,17 @@ public class Lecture extends AuditingField {
         return Objects.equals(id, lecture.id);
     }
 
+    public void addRegister(Register register) {
+        registerList.add(register);
+    }
+    public boolean checkDuplication(Long id) {
+        for (Register register : registerList) {
+            if (register.getUser().getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), id);
