@@ -92,5 +92,13 @@ public class LectureServiceImpl implements LectureService {
         Page<Notification> notifications = lectureRepository.findNotification(id,pageable);
         return notifications.map(((notification) -> NotificationDTO.from(lecture,notification)));
     }
+    @Transactional
+    @Override
+    public NotificationDTO postNotifications(Long id, CreateNotificationForm createNotificationForm) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(()-> new RuntimeException());
+        Notification notification = createNotificationForm.toNotification();
+        lecture.addNotification(notification);
+        return NotificationDTO.from(lecture,notification);
+    }
 
 }

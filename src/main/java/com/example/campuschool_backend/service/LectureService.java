@@ -16,4 +16,5 @@ public interface LectureService {
     LectureDetailDTO getLectureDetail(Long id);
     Long registerLecture(UserEntity userEntity, Long id);
     Page<NotificationDTO> getNotifications(Long id,Pageable pageable);
+    NotificationDTO postNotifications(Long id,CreateNotificationForm createNotificationForm);
 }

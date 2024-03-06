@@ -61,6 +61,9 @@ public class Lecture extends AuditingField {
     public void addRegister(Register register) {
         registerList.add(register);
     }
+    public void addNotification(Notification notification) {
+        notificationList.add(notification);
+    }
     public boolean checkDuplication(Long id) {
         for (Register register : registerList) {
             if (register.getUser().getId().equals(id)) {
