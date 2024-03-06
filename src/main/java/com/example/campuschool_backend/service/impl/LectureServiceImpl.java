@@ -1,15 +1,12 @@
 package com.example.campuschool_backend.service.impl;
 
 import com.example.campuschool_backend.domain.lecture.Lecture;
+import com.example.campuschool_backend.domain.lecture.Notification;
 import com.example.campuschool_backend.domain.lecture.Register;
 import com.example.campuschool_backend.domain.user.UserEntity;
-import com.example.campuschool_backend.dto.lecture.CreateLectureForm;
-import com.example.campuschool_backend.dto.lecture.LectureCardDTO;
-import com.example.campuschool_backend.dto.lecture.LectureDetailDTO;
-import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
+import com.example.campuschool_backend.dto.lecture.*;
 import com.example.campuschool_backend.repository.LectureRepository;
 import com.example.campuschool_backend.service.LectureService;
-import com.example.campuschool_backend.util.FileUpload;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -87,6 +84,13 @@ public class LectureServiceImpl implements LectureService {
         if(lecture.checkMyLecture(id)) throw new RuntimeException();
         lecture.addRegister(register);
         return register.getId();
+    }
+
+    @Override
+    public Page<NotificationDTO> getNotifications(Long id,Pageable pageable) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(()->new RuntimeException());
+        Page<Notification> notifications = lectureRepository.findNotification(id,pageable);
+        return notifications.map(((notification) -> NotificationDTO.from(lecture,notification)));
     }
 
 }

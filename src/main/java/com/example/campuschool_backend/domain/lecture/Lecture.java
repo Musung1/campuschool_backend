@@ -46,6 +46,9 @@ public class Lecture extends AuditingField {
     @OneToMany
     @JoinColumn(name = "lecture_id")
     private List<Review> reviewList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecture_id")
+    private List<Notification> notificationList = new ArrayList<>();
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,6 +1,7 @@
 package com.example.campuschool_backend.repository;
 
 import com.example.campuschool_backend.domain.lecture.Lecture;
+import com.example.campuschool_backend.domain.lecture.Notification;
 import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,4 +13,5 @@ public interface CustomLectureRepository {
     List<Lecture> findRecentLectures();
     Page<Lecture> findLectures(LectureSearchParam lectureSearchParam, Pageable pageable);
     List<Lecture> findMyOpenLectures(Long id);
+    Page<Notification> findNotification(Long id, Pageable pageable);
 }

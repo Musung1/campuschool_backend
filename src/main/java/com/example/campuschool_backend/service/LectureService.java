@@ -1,10 +1,7 @@
 package com.example.campuschool_backend.service;
 
 import com.example.campuschool_backend.domain.user.UserEntity;
-import com.example.campuschool_backend.dto.lecture.CreateLectureForm;
-import com.example.campuschool_backend.dto.lecture.LectureCardDTO;
-import com.example.campuschool_backend.dto.lecture.LectureDetailDTO;
-import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
+import com.example.campuschool_backend.dto.lecture.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,4 +15,5 @@ public interface LectureService {
     List<LectureCardDTO> getMyOpenLectures(UserEntity user);
     LectureDetailDTO getLectureDetail(Long id);
     Long registerLecture(UserEntity userEntity, Long id);
+    Page<NotificationDTO> getNotifications(Long id,Pageable pageable);
 }

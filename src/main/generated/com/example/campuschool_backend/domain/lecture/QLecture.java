@@ -49,6 +49,8 @@ public class QLecture extends EntityPathBase<Lecture> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
 
+    public final ListPath<Notification, QNotification> notificationList = this.<Notification, QNotification>createList("notificationList", Notification.class, QNotification.class, PathInits.DIRECT2);
+
     public final StringPath refImage = createString("refImage");
 
     public final ListPath<Register, QRegister> registerList = this.<Register, QRegister>createList("registerList", Register.class, QRegister.class, PathInits.DIRECT2);
