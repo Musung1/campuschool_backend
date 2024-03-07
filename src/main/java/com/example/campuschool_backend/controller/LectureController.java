@@ -88,6 +88,7 @@ public class LectureController {
     @GetMapping("/{id}")
     public ResponseEntity<LectureDetailDTO> getLectureDetail(@PathVariable Long id) {
         LectureDetailDTO lectureDetailDTO = lectureService.getLectureDetail(id);
+        lectureService.addView(id);
         return ResponseEntity.ok(lectureDetailDTO);
     }
     @PostMapping("/{id}")

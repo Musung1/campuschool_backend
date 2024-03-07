@@ -21,4 +21,5 @@ public interface LectureService {
     Boolean approveRegister(Long id,Long registerId);
     List<LectureCardDTO> getMyRegisterLectures(UserEntity user);
     List<LectureCardDTO> getMyWaitLectures(UserEntity user);
+    void addView(Long id);
 }

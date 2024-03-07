@@ -132,5 +132,13 @@ public class LectureServiceImpl implements LectureService {
         List<Lecture> lectures = lectureRepository.findMyWaitLectures(user.getId());
         return lectures.stream().map((LectureCardDTO::from)).toList();
     }
+    @Transactional
+    @Override
+    public void addView(Long id) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(()->new RuntimeException());
+        lecture.addView();
+        System.out.println("hello");
+        System.out.println(lecture.getViews());
+    }
 
 }

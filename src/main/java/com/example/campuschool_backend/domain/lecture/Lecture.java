@@ -57,7 +57,9 @@ public class Lecture extends AuditingField {
         Lecture lecture = (Lecture) o;
         return Objects.equals(id, lecture.id);
     }
-
+    public void addView() {
+        setViews(views+1);
+    }
     public void addRegister(Register register) {
         registerList.add(register);
     }
