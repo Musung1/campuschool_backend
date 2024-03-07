@@ -3,6 +3,7 @@ package com.example.campuschool_backend.service.impl;
 import com.example.campuschool_backend.domain.lecture.Lecture;
 import com.example.campuschool_backend.domain.lecture.Notification;
 import com.example.campuschool_backend.domain.lecture.Register;
+import com.example.campuschool_backend.domain.lecture.enums.RegisterStatus;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.*;
 import com.example.campuschool_backend.repository.LectureRepository;
@@ -81,7 +82,7 @@ public class LectureServiceImpl implements LectureService {
         Register register = Register.of(userEntity);
         Lecture lecture = lectureRepository.findById(id).orElseThrow(()-> new RuntimeException());
         if(lecture.checkDuplication(id)) throw new RuntimeException();
-        if(lecture.checkMyLecture(id)) throw new RuntimeException();
+        if(lecture.checkMyLecture(userEntity.getId())) throw new RuntimeException();
         lecture.addRegister(register);
         return register.getId();
     }
@@ -99,6 +100,25 @@ public class LectureServiceImpl implements LectureService {
         Notification notification = createNotificationForm.toNotification();
         lecture.addNotification(notification);
         return NotificationDTO.from(lecture,notification);
+    }
+
+    @Override
+    public List<RegisterDTO> getRegisters(Long id) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(()->new RuntimeException());
+        return lecture.getRegisterList().stream()
+                .filter((register -> register.getStatus().equals(RegisterStatus.WAIT)))
+                .map((RegisterDTO::from))
+                .toList();
+    }
+    @Transactional
+    @Override
+    public Boolean approveRegister(Long id, Long registerId) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(()->new RuntimeException());
+        Register find = lecture.getRegisterList().stream()
+                .filter((register -> register.getId().equals(registerId)))
+                .findFirst().orElseThrow(() -> new RuntimeException());
+        find.setStatus(RegisterStatus.COMPLETE);
+        return true;
     }
 
 }

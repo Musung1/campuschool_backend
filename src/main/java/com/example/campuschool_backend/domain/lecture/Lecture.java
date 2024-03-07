@@ -73,8 +73,7 @@ public class Lecture extends AuditingField {
         return false;
     }
     public boolean checkMyLecture(Long id) {
-        if(teacher.getId().equals(id)) return true;
-        return false;
+        return teacher.getId().equals(id);
     }
     @Override
     public int hashCode() {
