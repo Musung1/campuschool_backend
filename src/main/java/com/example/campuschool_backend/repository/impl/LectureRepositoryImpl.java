@@ -1,12 +1,11 @@
 package com.example.campuschool_backend.repository.impl;
 
-import com.example.campuschool_backend.domain.lecture.Lecture;
-import com.example.campuschool_backend.domain.lecture.Notification;
-import com.example.campuschool_backend.domain.lecture.QLecture;
-import com.example.campuschool_backend.domain.lecture.QNotification;
+import com.example.campuschool_backend.domain.lecture.*;
+import com.example.campuschool_backend.domain.lecture.enums.RegisterStatus;
 import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
 import com.example.campuschool_backend.repository.CustomLectureRepository;
 import com.example.campuschool_backend.repository.LectureRepository;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Predicate;
@@ -71,6 +70,26 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
                 .where(myLecture(qlecture,id))
                 .fetch();
         return lectureList;
+    }
+    @Override
+    public List<Lecture> findMyRegisterLectures(Long id) {
+        QLecture lecture = QLecture.lecture;
+        QRegister register = QRegister.register;
+        return queryFactory.selectFrom(lecture)
+                .innerJoin(lecture.registerList, register)
+                .where(register.user.id.eq(id)
+                        .and(register.status.eq(RegisterStatus.COMPLETE)))
+                .fetch();
+    }
+    @Override
+    public List<Lecture> findMyWaitLectures(Long id) {
+        QLecture lecture = QLecture.lecture;
+        QRegister register = QRegister.register;
+        return queryFactory.selectFrom(lecture)
+                .innerJoin(lecture.registerList, register)
+                .where(register.user.id.eq(id)
+                        .and(register.status.eq(RegisterStatus.WAIT)))
+                .fetch();
     }
 
     @Override

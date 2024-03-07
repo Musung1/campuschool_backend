@@ -64,16 +64,31 @@ public class LectureController {
         Page<LectureCardDTO> lectureCardDTOList = lectureService.Lectures(lectureSearchParam,pageable);
         return ResponseEntity.ok(lectureCardDTOList);
     }
-    @GetMapping("open")
+    @GetMapping("/open")
     public ResponseEntity<List<LectureCardDTO>> getMyOpenLectures(@AuthenticationPrincipal UserDetails userDetails) {
         PrincipalUser principalUser = (PrincipalUser) userDetails;
         UserEntity user = principalUser.getUser();
         List<LectureCardDTO> myOpenLectures = lectureService.getMyOpenLectures(user);
         return ResponseEntity.ok(myOpenLectures);
     }
+    @GetMapping("/register")
+    public ResponseEntity<List<LectureCardDTO>> getMyRegisterLectures(@AuthenticationPrincipal UserDetails userDetails) {
+        PrincipalUser principalUser = (PrincipalUser) userDetails;
+        UserEntity user = principalUser.getUser();
+        List<LectureCardDTO> myRegisterLectures = lectureService.getMyRegisterLectures(user);
+        return ResponseEntity.ok(myRegisterLectures);
+    }
+    @GetMapping("/wait")
+    public ResponseEntity<List<LectureCardDTO>> getMyWaitLectures(@AuthenticationPrincipal UserDetails userDetails) {
+        PrincipalUser principalUser = (PrincipalUser) userDetails;
+        UserEntity user = principalUser.getUser();
+        List<LectureCardDTO> myRegisterLectures = lectureService.getMyWaitLectures(user);
+        return ResponseEntity.ok(myRegisterLectures);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<LectureDetailDTO> getLectureDetail(@PathVariable Long id) {
         LectureDetailDTO lectureDetailDTO = lectureService.getLectureDetail(id);
+        lectureService.addView(id);
         return ResponseEntity.ok(lectureDetailDTO);
     }
     @PostMapping("/{id}")

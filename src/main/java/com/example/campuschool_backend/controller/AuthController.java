@@ -7,7 +7,6 @@ import com.example.campuschool_backend.dto.UserDTO;
 import com.example.campuschool_backend.security.PrincipalUser;
 import com.example.campuschool_backend.service.UserService;
 import com.example.campuschool_backend.util.FileUpload;
-import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
