@@ -19,4 +19,6 @@ public interface LectureService {
     NotificationDTO postNotifications(Long id,CreateNotificationForm createNotificationForm);
     List<RegisterDTO> getRegisters(Long id);
     Boolean approveRegister(Long id,Long registerId);
+    List<LectureCardDTO> getMyRegisterLectures(UserEntity user);
+    List<LectureCardDTO> getMyWaitLectures(UserEntity user);
 }

@@ -14,4 +14,6 @@ public interface CustomLectureRepository {
     Page<Lecture> findLectures(LectureSearchParam lectureSearchParam, Pageable pageable);
     List<Lecture> findMyOpenLectures(Long id);
     Page<Notification> findNotification(Long id, Pageable pageable);
+    List<Lecture> findMyRegisterLectures(Long id);
+    List<Lecture> findMyWaitLectures(Long id);
 }
