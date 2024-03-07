@@ -21,7 +21,7 @@ public class Notification extends AuditingField {
     private String content;
 
     protected Notification() {}
-    public Notification of(String title, String content) {
+    public static Notification of(String title, String content) {
         Notification notification = new Notification();
         notification.setTitle(title);
         notification.setContent(content);

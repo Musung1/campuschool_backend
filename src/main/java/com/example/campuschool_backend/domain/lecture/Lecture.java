@@ -46,6 +46,9 @@ public class Lecture extends AuditingField {
     @OneToMany
     @JoinColumn(name = "lecture_id")
     private List<Review> reviewList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecture_id")
+    private List<Notification> notificationList = new ArrayList<>();
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,6 +61,9 @@ public class Lecture extends AuditingField {
     public void addRegister(Register register) {
         registerList.add(register);
     }
+    public void addNotification(Notification notification) {
+        notificationList.add(notification);
+    }
     public boolean checkDuplication(Long id) {
         for (Register register : registerList) {
             if (register.getUser().getId().equals(id)) {
@@ -67,8 +73,7 @@ public class Lecture extends AuditingField {
         return false;
     }
     public boolean checkMyLecture(Long id) {
-        if(teacher.getId().equals(id)) return true;
-        return false;
+        return teacher.getId().equals(id);
     }
     @Override
     public int hashCode() {

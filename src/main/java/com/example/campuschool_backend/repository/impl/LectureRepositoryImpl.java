@@ -1,7 +1,9 @@
 package com.example.campuschool_backend.repository.impl;
 
 import com.example.campuschool_backend.domain.lecture.Lecture;
+import com.example.campuschool_backend.domain.lecture.Notification;
 import com.example.campuschool_backend.domain.lecture.QLecture;
+import com.example.campuschool_backend.domain.lecture.QNotification;
 import com.example.campuschool_backend.dto.lecture.LectureSearchParam;
 import com.example.campuschool_backend.repository.CustomLectureRepository;
 import com.example.campuschool_backend.repository.LectureRepository;
@@ -71,6 +73,17 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
         return lectureList;
     }
 
+    @Override
+    public Page<Notification> findNotification(Long id, Pageable pageable) {
+        QLecture qLecture = QLecture.lecture;
+        BooleanExpression condition = qLecture.id.eq(id);
+        Lecture lecture = queryFactory
+                .selectFrom(qLecture)
+                .where(condition)
+                .fetchOne();
+        return new PageImpl<>(lecture.getNotificationList(),pageable,lecture.getNotificationList().size());
+    }
+
     private Predicate searchProducts(QLecture lecture, LectureSearchParam lectureSearchParam) {
         BooleanExpression predicate = Expressions.TRUE;
         if(lectureSearchParam.getCategoryType() != null) {
@@ -88,6 +101,11 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
     private Predicate myLecture(QLecture lecture, Long id) {
         BooleanExpression predicate = Expressions.TRUE;
         predicate = predicate.and(lecture.teacher.id.eq(id));
+        return predicate;
+    }
+    private Predicate thisLecture(QLecture lecture, Long id) {
+        BooleanExpression predicate = Expressions.TRUE;
+        predicate = predicate.and(lecture.id.eq(id));
         return predicate;
     }
     private OrderSpecifier<?> lectureSort(QLecture lecture, Pageable page) {
