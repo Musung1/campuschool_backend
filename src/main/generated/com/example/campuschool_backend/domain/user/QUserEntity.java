@@ -36,6 +36,8 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public final StringPath portfolioImg = createString("portfolioImg");
 
+    public final ListPath<com.example.campuschool_backend.domain.lecture.Review, com.example.campuschool_backend.domain.lecture.QReview> reviewList = this.<com.example.campuschool_backend.domain.lecture.Review, com.example.campuschool_backend.domain.lecture.QReview>createList("reviewList", com.example.campuschool_backend.domain.lecture.Review.class, com.example.campuschool_backend.domain.lecture.QReview.class, PathInits.DIRECT2);
+
     public final EnumPath<RoleType> roleType = createEnum("roleType", RoleType.class);
 
     public final StringPath username = createString("username");

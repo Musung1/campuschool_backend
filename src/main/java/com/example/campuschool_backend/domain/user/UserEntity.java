@@ -1,11 +1,15 @@
 package com.example.campuschool_backend.domain.user;
 
+import com.example.campuschool_backend.domain.lecture.Review;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 @Setter
 @Getter
@@ -26,6 +30,13 @@ public class UserEntity {
     private LoginType loginType;
     @Embedded
     private Description description;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private List<Review> reviewList = new ArrayList<>();
+
+    public void addReview(Review review) {
+        //reviewList.add(review);
+        review.setUser(this);
+    }
 
     @Override
     public boolean equals(Object o) {

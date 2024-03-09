@@ -42,7 +42,7 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
     public List<Lecture> findRecentLectures() {
         QLecture qLecture = new QLecture("l");
         return queryFactory.selectFrom(qLecture)
-                .orderBy(qLecture.createdAt.asc())
+                .orderBy(qLecture.createdAt.desc())
                 .limit(5)
                 .fetch();
     }
@@ -90,6 +90,26 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
                 .where(register.user.id.eq(id)
                         .and(register.status.eq(RegisterStatus.WAIT)))
                 .fetch();
+    }
+
+    @Override
+    public Page<Review> findReview(Long id, Pageable pageable) {
+        QLecture qLecture = QLecture.lecture;
+        QReview review = QReview.review;
+        BooleanExpression condition = review.lecture.id.eq(id);
+
+        List<Review> reviewList = queryFactory.selectFrom(review)
+                .where(condition)
+                .orderBy(new OrderSpecifier<>(Order.DESC, review.createdAt))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        Long count = queryFactory.select(review.count())
+                .from(review)
+                .where(condition)
+                .fetchOne();
+        return new PageImpl<>(reviewList,pageable, count);
     }
 
     @Override

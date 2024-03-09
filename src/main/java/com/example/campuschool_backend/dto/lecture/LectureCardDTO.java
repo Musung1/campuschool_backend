@@ -20,6 +20,8 @@ public class LectureCardDTO {
     private LectureStatus lectureStatus;
     private int views;
     private String teacherName;
+    private int averageRating;
+    private int reviews;
 
     public static LectureCardDTO from(Lecture lecture) {
         return LectureCardDTO.builder()
@@ -31,7 +33,9 @@ public class LectureCardDTO {
                 .description(lecture.getDescription())
                 .lectureStatus(lecture.getLectureStatus())
                 .views(lecture.getViews())
-                .teacherName("user")
+                .teacherName(lecture.getTeacher().getName())
+                .reviews(lecture.getReviewList().size())
+                .averageRating(lecture.getAverageRating())
                 .build();
     }
 }
