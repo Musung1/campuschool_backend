@@ -25,4 +25,5 @@ public interface LectureService {
     void addView(Long id);
     Page<ReviewDTO> getReviews(Long id, Pageable pageable);
     ReviewDTO postReview(Long id, Review review);
+    List<ReviewCardDTO> getRecentReviews();
 }

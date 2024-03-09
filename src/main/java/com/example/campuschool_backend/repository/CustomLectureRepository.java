@@ -18,4 +18,5 @@ public interface CustomLectureRepository {
     List<Lecture> findMyRegisterLectures(Long id);
     List<Lecture> findMyWaitLectures(Long id);
     Page<Review> findReview(Long id, Pageable pageable);
+    List<Review> findRecentReviews();
 }

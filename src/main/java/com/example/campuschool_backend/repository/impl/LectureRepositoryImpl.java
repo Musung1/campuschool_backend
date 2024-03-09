@@ -113,6 +113,15 @@ public class LectureRepositoryImpl implements CustomLectureRepository {
     }
 
     @Override
+    public List<Review> findRecentReviews() {
+        QReview review = QReview.review;
+        return queryFactory.selectFrom(review)
+                .orderBy(new OrderSpecifier<>(Order.DESC, review.createdAt))
+                .limit(5)
+                .fetch();
+    }
+
+    @Override
     public Page<Notification> findNotification(Long id, Pageable pageable) {
         QLecture qLecture = QLecture.lecture;
         BooleanExpression condition = qLecture.id.eq(id);

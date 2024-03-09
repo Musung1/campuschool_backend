@@ -156,4 +156,10 @@ public class LectureServiceImpl implements LectureService {
         return ReviewDTO.from(review);
     }
 
+    @Override
+    public List<ReviewCardDTO> getRecentReviews() {
+        List<Review> reviews = lectureRepository.findRecentReviews();
+        return reviews.stream().map((ReviewCardDTO::from)).toList();
+    }
+
 }
