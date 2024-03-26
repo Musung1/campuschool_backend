@@ -1,5 +1,6 @@
 package com.example.campuschool_backend.service;
 
+import com.example.campuschool_backend.domain.lecture.Review;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.*;
 import org.springframework.data.domain.Page;
@@ -22,4 +23,7 @@ public interface LectureService {
     List<LectureCardDTO> getMyRegisterLectures(UserEntity user);
     List<LectureCardDTO> getMyWaitLectures(UserEntity user);
     void addView(Long id);
+    Page<ReviewDTO> getReviews(Long id, Pageable pageable);
+    ReviewDTO postReview(Long id, Review review);
+    List<ReviewCardDTO> getRecentReviews();
 }

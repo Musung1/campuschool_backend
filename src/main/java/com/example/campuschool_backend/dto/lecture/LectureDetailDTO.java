@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class LectureDetailDTO {
+    private Long id;
     private String teacherName;
     private String teacherImage;
     private String teacherDescription;

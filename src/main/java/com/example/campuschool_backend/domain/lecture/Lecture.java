@@ -43,8 +43,7 @@ public class Lecture extends AuditingField {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lecture_id")
     private List<AvaliableTime> avaliableTimeList = new ArrayList<>();
-    @OneToMany
-    @JoinColumn(name = "lecture_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lecture")
     private List<Review> reviewList = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lecture_id")
@@ -57,8 +56,20 @@ public class Lecture extends AuditingField {
         Lecture lecture = (Lecture) o;
         return Objects.equals(id, lecture.id);
     }
+    public int getAverageRating() {
+        int result = 0;
+        if(reviewList.size() == 0) return 0;
+        for (int i = 0; i < reviewList.size(); i++) {
+            result += reviewList.get(i).getRating();
+        }
+        return result/reviewList.size();
+    }
     public void addView() {
         setViews(views+1);
+    }
+    public void addReview(Review review) {
+        reviewList.add(review);
+        review.setLecture(this);
     }
     public void addRegister(Register register) {
         registerList.add(register);

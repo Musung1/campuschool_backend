@@ -3,6 +3,7 @@ package com.example.campuschool_backend.service.impl;
 import com.example.campuschool_backend.domain.lecture.Lecture;
 import com.example.campuschool_backend.domain.lecture.Notification;
 import com.example.campuschool_backend.domain.lecture.Register;
+import com.example.campuschool_backend.domain.lecture.Review;
 import com.example.campuschool_backend.domain.lecture.enums.RegisterStatus;
 import com.example.campuschool_backend.domain.user.UserEntity;
 import com.example.campuschool_backend.dto.lecture.*;
@@ -61,6 +62,7 @@ public class LectureServiceImpl implements LectureService {
     public LectureDetailDTO getLectureDetail(Long id) {
         Lecture lecture = lectureRepository.findById(id).orElseThrow(()-> new RuntimeException());
         return LectureDetailDTO.builder()
+                .id(lecture.getId())
                 .day(lecture.getDay())
                 .lectureDescription(lecture.getDescription())
                 .lectureImage(lecture.getRefImage())
@@ -139,6 +141,25 @@ public class LectureServiceImpl implements LectureService {
         lecture.addView();
         System.out.println("hello");
         System.out.println(lecture.getViews());
+    }
+
+    @Override
+    public Page<ReviewDTO> getReviews(Long id, Pageable pageable) {
+        Page<Review> reviews = lectureRepository.findReview(id,pageable);
+        return reviews.map((ReviewDTO::from));
+    }
+    @Transactional
+    @Override
+    public ReviewDTO postReview(Long id, Review review) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(()->new RuntimeException());
+        lecture.addReview(review);
+        return ReviewDTO.from(review);
+    }
+
+    @Override
+    public List<ReviewCardDTO> getRecentReviews() {
+        List<Review> reviews = lectureRepository.findRecentReviews();
+        return reviews.stream().map((ReviewCardDTO::from)).toList();
     }
 
 }
