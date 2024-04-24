@@ -4,14 +4,21 @@
 ## 캠퍼스 내 재능 판매 플랫폼
 ## STACK
 **Backend**
+
 Language : Java
+
 Library & Framework : Spring Boot
+
 Database : MySQLDB
+
 ORM : JPA
 
 **Frontend(Web)**
+
 Language : JavaScript
+
 Library & Framework : React, Styled-Components, Axios, Zustand
+
 
 ## 주요기능
 ### [홈]
