@@ -3,7 +3,7 @@
 
 ## 캠퍼스 내 재능 판매 플랫폼
 ## STACK
-**Backend**
+**[Backend]**
 
 Language : Java
 
@@ -13,7 +13,7 @@ Database : MySQLDB
 
 ORM : JPA
 
-**Frontend(Web)**
+**[Frontend(Web)]**
 
 Language : JavaScript
 
